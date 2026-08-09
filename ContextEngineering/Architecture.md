@@ -31,7 +31,8 @@ resulting architecture tends to be:
 ```
 Console.ReadLine (x2) -> double.Parse -> a + b -> Console.WriteLine
                                        -> a - b -> Console.WriteLine
+                                       -> a * b -> Console.WriteLine
 ```
 No layers, no interfaces, no dependency injection — everything is direct.
-Subtraction is added inline in `Main`, the same way addition is, since this
-track has no separate logic layer to extend.
+Subtraction and multiplication are added inline in `Main`, the same way
+addition is, since this track has no separate logic layer to extend.

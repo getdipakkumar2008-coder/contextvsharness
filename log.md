@@ -120,6 +120,46 @@ follows both rules.
      confirming the Context Engineering program works via manual run
      (still no automated test, by design of that track).
 
+---
+
+## Prompt
+
+> Let us add two number multiplication functionality feature.
+
+## Background work performed
+
+1. Updated docs first, per the standing `Claude.md` rule, in both tracks:
+   - `ContextEngineering/specification.md` — added a requirement to
+     print the product alongside the sum and difference.
+   - `ContextEngineering/Architecture.md` — extended the data-flow
+     diagram with the `a * b` step, noting it's inline like the rest.
+   - `ContextEngineering/Plan.md` — added an "Enhancement: multiplication
+     feature" checklist.
+   - `HarnessEngineering/specification.md` — added `Calculator.Multiply`
+     and its required test coverage.
+   - `HarnessEngineering/Architecture.md` — extended the data-flow
+     diagram; noted `Multiply` lives on the same `Calculator` class.
+   - `HarnessEngineering/Plan.md` — added an "Enhancement: multiplication
+     feature" checklist ending in a build/test verification step.
+
+2. Implemented the feature to match the updated docs:
+   - `ContextEngineering/ContextEngineeringAdd/Program.cs` — added
+     `double product = a * b;` and a third `Console.WriteLine`.
+   - `HarnessEngineering/HarnessEngineeringAdd/src/Calculator.cs` —
+     added `public double Multiply(double a, double b) => a * b;`.
+   - `HarnessEngineering/HarnessEngineeringAdd/src/Program.cs` — wired
+     `calculator.Multiply(a, b)` alongside `Add`/`Subtract`.
+   - `HarnessEngineering/HarnessEngineeringAdd/tests/CalculatorTests.cs`
+     — added a `Multiply_ReturnsExpectedProduct` `[Theory]` with 5 cases
+     (positive, mixed sign, negative pair, zero, decimal).
+
+3. Verified per each track's own definition of "done":
+   - `dotnet test HarnessEngineering/HarnessEngineeringAdd/tests/HarnessEngineeringAdd.Tests.csproj`
+     → **Passed! 15/15** (10 prior + 5 new `Multiply` cases).
+   - `dotnet run` on `ContextEngineeringAdd.csproj` with piped input `6`
+     and `7` → printed `Result: 6 + 7 = 13`, `Result: 6 - 7 = -1`,
+     `Result: 6 * 7 = 42`, confirming correctness via manual run.
+
 ## Outcome
 
 Subtraction is now implemented identically in spirit across both tracks
