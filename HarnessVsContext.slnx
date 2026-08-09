@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/ContextEngineering/">
+    <Project Path="ContextEngineering/ContextEngineeringAdd/ContextEngineeringAdd.csproj" />
+  </Folder>
+  <Folder Name="/HarnessEngineering/" />
+  <Folder Name="/HarnessEngineering/HarnessEngineeringAdd/" />
+  <Folder Name="/HarnessEngineering/HarnessEngineeringAdd/src/">
+    <Project Path="HarnessEngineering/HarnessEngineeringAdd/src/HarnessEngineeringAdd.csproj" />
+  </Folder>
+  <Folder Name="/HarnessEngineering/HarnessEngineeringAdd/tests/">
+    <Project Path="HarnessEngineering/HarnessEngineeringAdd/tests/HarnessEngineeringAdd.Tests.csproj" />
+  </Folder>
+</Solution>

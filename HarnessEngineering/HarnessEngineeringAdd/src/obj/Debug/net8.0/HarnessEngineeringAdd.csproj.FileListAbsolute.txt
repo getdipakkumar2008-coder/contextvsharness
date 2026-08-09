@@ -1,0 +1,14 @@
+C:\Code\Harnessvscontext\HarnessEngineering\HarnessEngineeringAdd\src\bin\Debug\net8.0\HarnessEngineeringAdd.exe
+C:\Code\Harnessvscontext\HarnessEngineering\HarnessEngineeringAdd\src\bin\Debug\net8.0\HarnessEngineeringAdd.deps.json
+C:\Code\Harnessvscontext\HarnessEngineering\HarnessEngineeringAdd\src\bin\Debug\net8.0\HarnessEngineeringAdd.runtimeconfig.json
+C:\Code\Harnessvscontext\HarnessEngineering\HarnessEngineeringAdd\src\bin\Debug\net8.0\HarnessEngineeringAdd.dll
+C:\Code\Harnessvscontext\HarnessEngineering\HarnessEngineeringAdd\src\bin\Debug\net8.0\HarnessEngineeringAdd.pdb
+C:\Code\Harnessvscontext\HarnessEngineering\HarnessEngineeringAdd\src\obj\Debug\net8.0\HarnessEngineeringAdd.GeneratedMSBuildEditorConfig.editorconfig
+C:\Code\Harnessvscontext\HarnessEngineering\HarnessEngineeringAdd\src\obj\Debug\net8.0\HarnessEngineeringAdd.AssemblyInfoInputs.cache
+C:\Code\Harnessvscontext\HarnessEngineering\HarnessEngineeringAdd\src\obj\Debug\net8.0\HarnessEngineeringAdd.AssemblyInfo.cs
+C:\Code\Harnessvscontext\HarnessEngineering\HarnessEngineeringAdd\src\obj\Debug\net8.0\HarnessEngineeringAdd.csproj.CoreCompileInputs.cache
+C:\Code\Harnessvscontext\HarnessEngineering\HarnessEngineeringAdd\src\obj\Debug\net8.0\HarnessEngineeringAdd.dll
+C:\Code\Harnessvscontext\HarnessEngineering\HarnessEngineeringAdd\src\obj\Debug\net8.0\refint\HarnessEngineeringAdd.dll
+C:\Code\Harnessvscontext\HarnessEngineering\HarnessEngineeringAdd\src\obj\Debug\net8.0\HarnessEngineeringAdd.pdb
+C:\Code\Harnessvscontext\HarnessEngineering\HarnessEngineeringAdd\src\obj\Debug\net8.0\HarnessEngineeringAdd.genruntimeconfig.cache
+C:\Code\Harnessvscontext\HarnessEngineering\HarnessEngineeringAdd\src\obj\Debug\net8.0\ref\HarnessEngineeringAdd.dll
