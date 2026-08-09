@@ -9,9 +9,11 @@ double b = ReadNumber("Enter second number: ");
 
 double sum = a + b;
 double difference = a - b;
+double product = a * b;
 
 Console.WriteLine($"Result: {a} + {b} = {sum}");
 Console.WriteLine($"Result: {a} - {b} = {difference}");
+Console.WriteLine($"Result: {a} * {b} = {product}");
 
 static double ReadNumber(string prompt)
 {

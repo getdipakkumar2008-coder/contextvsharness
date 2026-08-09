@@ -27,6 +27,15 @@
       track's constitution.
 - [ ] No test project added, by design — verified by manual run only.
 
+## Enhancement: multiplication feature
+- [x] Update specification.md to require printing the product as well.
+- [x] Update Architecture.md's data-flow section to note the third
+      inline computation.
+- [x] Add the multiplication line directly into `Program.cs`'s `Main`,
+      next to the existing addition/subtraction lines — no new file, no
+      new layer, per this track's constitution.
+- [ ] No test project added, by design — verified by manual run only.
+
 ## Feedback loop
 ```
 Prompt (spec+arch+constitution) -> Model -> Code -> Human reads code -> (maybe) edit prompt -> repeat

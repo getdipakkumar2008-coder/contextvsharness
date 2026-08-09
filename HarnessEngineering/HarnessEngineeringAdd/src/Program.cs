@@ -13,9 +13,11 @@ public static class Program
 
         double sum = calculator.Add(a, b);
         double difference = calculator.Subtract(a, b);
+        double product = calculator.Multiply(a, b);
 
         Console.WriteLine($"Result: {a} + {b} = {sum}");
         Console.WriteLine($"Result: {a} - {b} = {difference}");
+        Console.WriteLine($"Result: {a} * {b} = {product}");
     }
 
     private static double ReadNumber(string prompt)
