@@ -8,8 +8,10 @@ double a = ReadNumber("Enter first number: ");
 double b = ReadNumber("Enter second number: ");
 
 double sum = a + b;
+double difference = a - b;
 
 Console.WriteLine($"Result: {a} + {b} = {sum}");
+Console.WriteLine($"Result: {a} - {b} = {difference}");
 
 static double ReadNumber(string prompt)
 {

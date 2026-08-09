@@ -30,5 +30,8 @@ resulting architecture tends to be:
 ## Data flow
 ```
 Console.ReadLine (x2) -> double.Parse -> a + b -> Console.WriteLine
+                                       -> a - b -> Console.WriteLine
 ```
 No layers, no interfaces, no dependency injection — everything is direct.
+Subtraction is added inline in `Main`, the same way addition is, since this
+track has no separate logic layer to extend.

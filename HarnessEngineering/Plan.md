@@ -21,6 +21,16 @@
 - [ ] Run `dotnet build` and `dotnet test` (execute this after project
       generation, per this plan) and iterate on any failures.
 
+## Enhancement: subtraction feature
+- [x] Update specification.md to require `Calculator.Subtract` and its
+      test coverage.
+- [x] Update Architecture.md's data-flow section for the new method.
+- [x] Add `Subtract(double, double)` to `Calculator.cs`.
+- [x] Wire `Subtract` into `Program.cs` alongside `Add`.
+- [x] Add `[Theory]` cases for `Subtract` to `CalculatorTests.cs`.
+- [x] Run `dotnet build` + `dotnet test` and confirm all tests pass
+      before declaring the enhancement done.
+
 ## Feedback loop
 ```
 Spec + Architecture -> Code + Tests -> dotnet build/test -> read real output
