@@ -68,3 +68,64 @@ sets and code structure make the difference tangible:
 | Verification | Human reads code | `dotnet test` (5/5 passed) |
 | Code shape | One file, monolithic | Logic/I/O split, testable |
 | Feedback loop | Edit prompt, regenerate | Read real errors, fix, re-run |
+
+---
+
+## Prompt
+
+> Need to add substraction functionality feature of two numbers.
+
+## Background work performed
+
+Note: both `Claude.md` files were updated (by the user) before this
+prompt to add two standing rules: (1) future enhancements must update the
+`.md` docs first, before touching source code, and (2) every new prompt
+and its background work must be logged here in `log.md`. This entry
+follows both rules.
+
+1. Updated docs first, per the new `Claude.md` rule, in both tracks:
+   - `ContextEngineering/specification.md` — added a requirement to
+     print the difference alongside the sum.
+   - `ContextEngineering/Architecture.md` — extended the data-flow
+     diagram with the `a - b` step; noted it's added inline, same as
+     addition, since this track has no separate logic layer.
+   - `ContextEngineering/Plan.md` — added an "Enhancement: subtraction
+     feature" section with its own checklist.
+   - `HarnessEngineering/specification.md` — added `Calculator.Subtract`
+     and its required test coverage to the requirements.
+   - `HarnessEngineering/Architecture.md` — extended the data-flow
+     diagram and noted `Subtract` lives on the same `Calculator` class.
+   - `HarnessEngineering/Plan.md` — added an "Enhancement: subtraction
+     feature" checklist ending in a build/test verification step.
+
+2. Implemented the feature to match the updated docs:
+   - `ContextEngineering/ContextEngineeringAdd/Program.cs` — added
+     `double difference = a - b;` and a second `Console.WriteLine` next
+     to the existing addition line (still one file, no new layer).
+   - `HarnessEngineering/HarnessEngineeringAdd/src/Calculator.cs` —
+     added `public double Subtract(double a, double b) => a - b;`.
+   - `HarnessEngineering/HarnessEngineeringAdd/src/Program.cs` — wired
+     `calculator.Subtract(a, b)` alongside `Add` and printed the result.
+   - `HarnessEngineering/HarnessEngineeringAdd/tests/CalculatorTests.cs`
+     — added a `Subtract_ReturnsExpectedDifference` `[Theory]` with 5
+     cases (positive, negative, mixed sign, zero, decimal).
+
+3. Verified per each track's own definition of "done":
+   - `dotnet test HarnessEngineering/HarnessEngineeringAdd/tests/HarnessEngineeringAdd.Tests.csproj`
+     → **Passed! 10/10** (5 original `Add` cases + 5 new `Subtract`
+     cases), confirming the Harness Engineering track's build/test gate
+     was actually satisfied before calling this done.
+   - `dotnet run` on `ContextEngineeringAdd.csproj` with piped input `9`
+     and `4` → printed `Result: 9 + 4 = 13` and `Result: 9 - 4 = 5`,
+     confirming the Context Engineering program works via manual run
+     (still no automated test, by design of that track).
+
+## Outcome
+
+Subtraction is now implemented identically in spirit across both tracks
+(same `a - b` operation, same output format) but the *process* to get
+there stayed different: Context Engineering added the line straight into
+`Main` and was judged by a manual run; Harness Engineering added a method
+to the testable `Calculator` class and was judged by `dotnet test`
+passing 10/10. The doc sets were updated before any code changed, per
+each track's updated `Claude.md` rules.

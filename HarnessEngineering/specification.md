@@ -10,10 +10,13 @@ expected to *verify* its own work by actually building and running tests
 ## Requirements
 - A `Calculator` class exposing `Add(double a, double b) -> double`,
   independently testable without any console I/O.
-- A thin `Program.cs` entry point that wires `Calculator` to the console.
+- A `Calculator` class also exposing `Subtract(double a, double b) -> double`
+  (returns `a - b`), independently testable without any console I/O.
+- A thin `Program.cs` entry point that wires `Calculator` to the console
+  and prints both the sum and the difference.
 - A companion xUnit test project (`HarnessEngineeringAdd.Tests`) that
   exercises `Calculator.Add` with multiple cases (positive, negative,
-  zero, decimals).
+  zero, decimals) and `Calculator.Subtract` with the equivalent cases.
 - The definition of "done" is: **`dotnet test` passes**, not "the docs
   read well" or "the code looks plausible."
 

@@ -12,8 +12,10 @@ public static class Program
         double b = ReadNumber("Enter second number: ");
 
         double sum = calculator.Add(a, b);
+        double difference = calculator.Subtract(a, b);
 
         Console.WriteLine($"Result: {a} + {b} = {sum}");
+        Console.WriteLine($"Result: {a} - {b} = {difference}");
     }
 
     private static double ReadNumber(string prompt)
