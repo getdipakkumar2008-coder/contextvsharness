@@ -12,6 +12,7 @@ prompt) is worded.
 - Accept two numbers (hardcoded or via Console.ReadLine).
 - Print their sum.
 - Print their difference (first number minus second number).
+- Print their product (first number multiplied by second number).
 - Handle basic invalid input gracefully with a try/catch.
 
 ## How this spec is used

@@ -12,11 +12,14 @@ expected to *verify* its own work by actually building and running tests
   independently testable without any console I/O.
 - A `Calculator` class also exposing `Subtract(double a, double b) -> double`
   (returns `a - b`), independently testable without any console I/O.
+- A `Calculator` class also exposing `Multiply(double a, double b) -> double`
+  (returns `a * b`), independently testable without any console I/O.
 - A thin `Program.cs` entry point that wires `Calculator` to the console
-  and prints both the sum and the difference.
+  and prints the sum, the difference, and the product.
 - A companion xUnit test project (`HarnessEngineeringAdd.Tests`) that
-  exercises `Calculator.Add` with multiple cases (positive, negative,
-  zero, decimals) and `Calculator.Subtract` with the equivalent cases.
+  exercises `Calculator.Add`, `Calculator.Subtract`, and
+  `Calculator.Multiply` each with multiple cases (positive, negative,
+  zero, decimals).
 - The definition of "done" is: **`dotnet test` passes**, not "the docs
   read well" or "the code looks plausible."
 

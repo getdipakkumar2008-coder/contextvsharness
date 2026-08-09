@@ -31,6 +31,16 @@
 - [x] Run `dotnet build` + `dotnet test` and confirm all tests pass
       before declaring the enhancement done.
 
+## Enhancement: multiplication feature
+- [x] Update specification.md to require `Calculator.Multiply` and its
+      test coverage.
+- [x] Update Architecture.md's data-flow section for the new method.
+- [x] Add `Multiply(double, double)` to `Calculator.cs`.
+- [x] Wire `Multiply` into `Program.cs` alongside `Add`/`Subtract`.
+- [x] Add `[Theory]` cases for `Multiply` to `CalculatorTests.cs`.
+- [x] Run `dotnet build` + `dotnet test` and confirm all tests pass
+      before declaring the enhancement done.
+
 ## Feedback loop
 ```
 Spec + Architecture -> Code + Tests -> dotnet build/test -> read real output

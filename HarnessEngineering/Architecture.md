@@ -35,11 +35,13 @@ just the prompt text:
 ```
 Program.cs -> Console.ReadLine (x2) -> Calculator.Add(a, b)      -> Console.WriteLine
                                      -> Calculator.Subtract(a, b) -> Console.WriteLine
+                                     -> Calculator.Multiply(a, b) -> Console.WriteLine
                                               ^
                                               |
 CalculatorTests.cs ---- dotnet test ---------+   (harness-verified, independent of console I/O)
 ```
 
-`Subtract` is added to the same `Calculator` class as `Add` (both pure,
-no I/O), and `CalculatorTests.cs` gains an equivalent set of `[Theory]`
-cases so it stays covered by the same build/test loop.
+`Subtract` and `Multiply` are added to the same `Calculator` class as
+`Add` (all pure, no I/O), and `CalculatorTests.cs` gains an equivalent
+set of `[Theory]` cases for each so they stay covered by the same
+build/test loop.

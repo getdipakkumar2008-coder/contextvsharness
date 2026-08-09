@@ -120,6 +120,46 @@ follows both rules.
      confirming the Context Engineering program works via manual run
      (still no automated test, by design of that track).
 
+---
+
+## Prompt
+
+> Let us add two number multiplication functionality feature.
+
+## Background work performed
+
+1. Updated docs first, per the standing `Claude.md` rule, in both tracks:
+   - `ContextEngineering/specification.md` — added a requirement to
+     print the product alongside the sum and difference.
+   - `ContextEngineering/Architecture.md` — extended the data-flow
+     diagram with the `a * b` step, noting it's inline like the rest.
+   - `ContextEngineering/Plan.md` — added an "Enhancement: multiplication
+     feature" checklist.
+   - `HarnessEngineering/specification.md` — added `Calculator.Multiply`
+     and its required test coverage.
+   - `HarnessEngineering/Architecture.md` — extended the data-flow
+     diagram; noted `Multiply` lives on the same `Calculator` class.
+   - `HarnessEngineering/Plan.md` — added an "Enhancement: multiplication
+     feature" checklist ending in a build/test verification step.
+
+2. Implemented the feature to match the updated docs:
+   - `ContextEngineering/ContextEngineeringAdd/Program.cs` — added
+     `double product = a * b;` and a third `Console.WriteLine`.
+   - `HarnessEngineering/HarnessEngineeringAdd/src/Calculator.cs` —
+     added `public double Multiply(double a, double b) => a * b;`.
+   - `HarnessEngineering/HarnessEngineeringAdd/src/Program.cs` — wired
+     `calculator.Multiply(a, b)` alongside `Add`/`Subtract`.
+   - `HarnessEngineering/HarnessEngineeringAdd/tests/CalculatorTests.cs`
+     — added a `Multiply_ReturnsExpectedProduct` `[Theory]` with 5 cases
+     (positive, mixed sign, negative pair, zero, decimal).
+
+3. Verified per each track's own definition of "done":
+   - `dotnet test HarnessEngineering/HarnessEngineeringAdd/tests/HarnessEngineeringAdd.Tests.csproj`
+     → **Passed! 15/15** (10 prior + 5 new `Multiply` cases).
+   - `dotnet run` on `ContextEngineeringAdd.csproj` with piped input `6`
+     and `7` → printed `Result: 6 + 7 = 13`, `Result: 6 - 7 = -1`,
+     `Result: 6 * 7 = 42`, confirming correctness via manual run.
+
 ## Outcome
 
 Subtraction is now implemented identically in spirit across both tracks
@@ -129,3 +169,58 @@ there stayed different: Context Engineering added the line straight into
 to the testable `Calculator` class and was judged by `dotnet test`
 passing 10/10. The doc sets were updated before any code changed, per
 each track's updated `Claude.md` rules.
+
+---
+
+## Prompt
+
+> Let us add two number multiplication functionality feature. (repeated)
+
+## Background work performed
+
+Checked current state instead of redoing work: `Calculator.Multiply`,
+`Program.cs` wiring, and `Program.cs` inline `a * b` in the Context
+Engineering track were all already present from the prior turn (`dotnet
+test` still 15/15). No changes made — reported existing state back to the
+user and asked whether something different was intended (e.g. division).
+
+---
+
+## Prompt
+
+> after adding speckkit and dotnetskill it does not make any difference in
+> implementation?
+
+## Background work performed
+
+1. Investigated why `speckit` (`.github/agents/*.agent.md`,
+   `.github/prompts/*.prompt.md`) and `DotnetSkills`
+   (`DotnetSkills/skills/*.md`) had no observable effect on my behavior.
+2. Found the root cause: neither location is scanned by Claude Code.
+   Skills are only auto-loaded from `.claude/skills/<name>/SKILL.md`
+   (project or user level) — there was no `.claude` directory in this
+   repo at all. `speckit` is GitHub Copilot's Spec Kit format (a
+   different tool entirely); `DotnetSkills` already had correct
+   Claude-Code-style frontmatter but was sitting in a vendored, unscanned
+   folder.
+3. Asked the user how to proceed; they chose to integrate `DotnetSkills`
+   into Claude Code (leaving `speckit` alone, since it targets Copilot).
+4. Copied the four vendored skill files into proper skill folders so
+   Claude Code will discover them:
+   - `.claude/skills/run-tests/SKILL.md`
+   - `.claude/skills/assertion-quality/SKILL.md`
+   - `.claude/skills/directory-build-organization/SKILL.md`
+   - `.claude/skills/setup-local-sdk/SKILL.md`
+5. Updated `HarnessEngineering/Claude.md` to point at the new skills —
+   prefer the `run-tests` skill's detected command form over ad hoc
+   `dotnet test` calls, and use `assertion-quality` when asked to judge
+   `CalculatorTests.cs` assertion quality.
+
+## Outcome
+
+`speckit` remains inert by design (it's Copilot-specific tooling, not
+something Claude Code loads). `DotnetSkills` is now registered under
+`.claude/skills/` and referenced from `HarnessEngineering/Claude.md`; it
+will be picked up as invocable skills starting from the next fresh
+session (this session's skill list was already fetched at start, before
+the files existed in the scanned location).
