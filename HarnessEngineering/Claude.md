@@ -15,6 +15,11 @@ run, and verify this project — not just generate text once.
 - Do not mark this track complete based on code review alone; execution
   evidence (`dotnet test` output) is required.
 - Keep `Calculator` free of Console I/O so it stays unit-testable.
+- Vendored `dotnet/skills` guidance is registered under `.claude/skills/`
+  (`run-tests`, `assertion-quality`, `directory-build-organization`,
+  `setup-local-sdk`). Prefer the `run-tests` skill's detected command form
+  over ad hoc `dotnet test` invocations, and use `assertion-quality` when
+  asked to judge whether `CalculatorTests.cs` assertions are meaningful.
 - If new enchancement is required in the future do not go to source code try using only 
   .md files amd update the existing .md files before making  any code  changes.
 -  Make logging of every new prompt amd background  task and always update log.md
