@@ -15,9 +15,11 @@ expected to *verify* its own work by actually building and running tests
 - A `Calculator` class also exposing `Multiply(double a, double b) -> double`
   (returns `a * b`), independently testable without any console I/O.
 - A `Calculator` class also exposing `Divide(double a, double b) -> double`
-  (returns `a / b`), independently testable without any console I/O. Note:
-  this is intentionally left without a zero-check in this test-PR change —
-  a good candidate for the Claude review bot to flag.
+  (returns `a / b`), independently testable without any console I/O.
+  `Divide` must throw `DivideByZeroException` when `b == 0`, rather than
+  silently returning `double.PositiveInfinity`/`NaN`. (This guard was
+  intentionally omitted in an earlier test PR — see `log.md` — and is
+  fixed here.)
 - A thin `Program.cs` entry point that wires `Calculator` to the console
   and prints the sum, the difference, the product, and the quotient.
 - A companion xUnit test project (`HarnessEngineeringAdd.Tests`) that
