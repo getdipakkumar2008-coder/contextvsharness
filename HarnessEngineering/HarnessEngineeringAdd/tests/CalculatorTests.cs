@@ -42,4 +42,15 @@ public class CalculatorTests
         double result = _calculator.Multiply(a, b);
         Assert.Equal(expected, result);
     }
+
+    [Theory]
+    [InlineData(6, 3, 2)]
+    [InlineData(-6, 3, -2)]
+    [InlineData(-6, -3, 2)]
+    [InlineData(5, 2, 2.5)]
+    public void Divide_ReturnsExpectedQuotient(double a, double b, double expected)
+    {
+        double result = _calculator.Divide(a, b);
+        Assert.Equal(expected, result);
+    }
 }
