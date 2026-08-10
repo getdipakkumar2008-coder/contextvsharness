@@ -330,6 +330,34 @@ read-only PR permissions, so reviews ran but could never post) and
 navigated two GitHub-side surprises along the way: an out-of-band PR merge
 by the repo owner, and GitHub's built-in protection against a PR
 self-granting permissions via its own workflow-file change. The fix is now
-on `main`; a follow-up PR (`test/verify-review-fix`) is open to confirm
-the review can actually post now that the workflow file it runs under
-matches `main`.
+on `main`.
+
+**Verification (PR #7) found a second, separate blocker still open**: with
+the GITHUB_TOKEN permission fix in place, the review ran a full deep pass
+(25 turns, ~$0.88, 143s, `is_error: false`) but still ended with
+`permission_denials_count: 2` and posted nothing. This is very likely a
+different layer than the token scope — the `claude-code-action`'s own
+internal allowed-tools list, which can independently block whatever
+command the `code-review` plugin uses to submit its review (e.g. a `gh pr
+comment`/`gh pr review` Bash call not in the allowlist), separate from
+what the GitHub App token itself is permitted to do. Full agent output is
+hidden by default (`show_full_output: true` would reveal the exact denied
+tool call) — diagnosing further means enabling that flag and re-running,
+which costs another real run (~$0.88, comparable to the last one). User
+chose to stop here rather than spend another run right now.
+
+## Next steps (when resumed)
+
+1. Temporarily add `show_full_output: true` to
+   `.github/workflows/claude-code-review.yml`, push on a small PR, and
+   read the full transcript to find the exact denied tool call behind
+   `permission_denials_count: 2`.
+2. Likely fix: add the specific `gh` subcommand(s) the `code-review`
+   plugin needs to an `--allowed-tools`/`claude_args` entry in the
+   workflow (per the commented-out example already in the file:
+   `claude_args: '--allowed-tools Bash(gh pr *)'` — note: needs the
+   *specific* subcommands actually used, not a broad wildcard).
+3. Revert `show_full_output: true` once diagnosed (it's a debug aid, not
+   meant to stay on).
+4. Re-verify on a fresh small PR that a review comment/review actually
+   posts before considering this closed.
