@@ -224,3 +224,47 @@ something Claude Code loads). `DotnetSkills` is now registered under
 will be picked up as invocable skills starting from the next fresh
 session (this session's skill list was already fetched at start, before
 the files existed in the scanned location).
+
+---
+
+## Prompt
+
+> (ran `/install-github-app`, which reported "GitHub Actions setup
+> complete!") create a test PR for claude review
+
+## Background work performed
+
+1. Confirmed repo state: local `enhancement2` branch, remote `origin`
+   pointing at `github.com/getdipakkumar2008-coder/contextvsharness`, and
+   two Claude review workflows already present on `main`
+   (`.github/workflows/claude-code-review.yml`, `claude.yml`), confirmed
+   via `gh workflow list` and the GitHub contents API.
+2. Fetched and fast-forwarded local `main` to match `origin/main` (11
+   commits behind — mostly the earlier `DotnetSkills`/Spec Kit/log.md
+   work already pushed by prior turns), then branched
+   `test/claude-review-pr` off the synced `main`.
+3. Added a `Divide` feature to the Harness Engineering track, updating
+   docs first per the standing rule:
+   - `HarnessEngineering/specification.md` — added `Calculator.Divide`
+     requirement, explicitly noting the zero-check is intentionally
+     omitted in this change as bait for the review bot.
+   - `HarnessEngineering/HarnessEngineeringAdd/src/Calculator.cs` — added
+     `public double Divide(double a, double b) => a / b;` (no
+     divide-by-zero guard, on purpose).
+   - `HarnessEngineering/HarnessEngineeringAdd/src/Program.cs` — wired
+     `calculator.Divide(a, b)` alongside `Add`/`Subtract`/`Multiply`.
+   - `HarnessEngineering/HarnessEngineeringAdd/tests/CalculatorTests.cs`
+     — added `Divide_ReturnsExpectedQuotient` with 4 cases (does not
+     cover the zero-divisor case, also intentional).
+4. Verified: `dotnet test` on `HarnessEngineeringAdd.Tests.csproj` →
+   **Passed! 19/19** (15 prior + 4 new `Divide` cases).
+5. Committed on `test/claude-review-pr`, pushed to `origin`, and opened a
+   PR against `main` via `gh pr create` so the `claude-code-review.yml`
+   workflow triggers automatically.
+
+## Outcome
+
+A real (not placeholder) test PR: adds working division functionality to
+the Harness Engineering `Calculator`, backed by passing tests, but
+deliberately missing a divide-by-zero guard so the Claude Code Review
+GitHub Action has a genuine, non-trivial finding to surface.
